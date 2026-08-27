@@ -1,0 +1,10 @@
+[importlinter]
+root_package = app
+
+# Add contracts as modules appear. Example:
+# [importlinter:contract:no-cycles]
+# name = No cycles between app modules
+# type = layers
+# layers =
+#     app.api
+#     app.core

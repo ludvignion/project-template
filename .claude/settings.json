@@ -1,0 +1,8 @@
+{
+  "extraKnownMarketplaces": {
+    "ludvignion": { "source": { "source": "github", "repo": "ludvignion/harness-plugin" } }
+  },
+  "enabledPlugins": {
+    "harness-plugin@ludvignion": true
+  }
+}

@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.mutmut-cache
+kanban/.active
+traces/sessions.jsonl
+traces/plan/*.html
+traces/verdict/*.html
+traces/board.html
+.env

@@ -1,0 +1,20 @@
+name: CI
+on:
+  push: { branches: [main] }
+  pull_request:
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with: { python-version: "3.12" }
+      - run: uv sync
+      - run: make ci
+      - name: tests-before-code (PR only)
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch origin ${{ github.base_ref }} --depth=50
+          first=$(git log --reverse --format=%s origin/${{ github.base_ref }}..HEAD | head -1)
+          echo "first commit: $first"
+          case "$first" in test*) ;; *) echo "::error::first commit on a ticket branch must be the test commit"; exit 1;; esac
