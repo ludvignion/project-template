@@ -2,6 +2,8 @@
 __pycache__/
 *.pyc
 .mypy_cache/
+.hypothesis/
+.import_linter_cache/
 .ruff_cache/
 .pytest_cache/
 .mutmut-cache
