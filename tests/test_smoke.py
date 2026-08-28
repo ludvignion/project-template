@@ -1,2 +1,5 @@
+import app
+
+
 def test_smoke() -> None:
-    import app  # noqa: F401
+    assert app.__name__ == "app"
