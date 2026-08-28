@@ -9,8 +9,8 @@ Workflow comes from **harness-plugin** (pinned in `.claude/settings.json`). Do n
 | Path | Role |
 |---|---|
 | `kanban/briefs/` | human-written briefs |
-| `kanban/<n>.plan.md` | grill write-back; gate 1 lives in its `approved:` line |
-| `kanban/<n>.<m>.<slug>.md` | tickets; role-tagged append-only `## Log` |
+| `kanban/plans/<n>.plan.md` | grill write-back; gate 1 lives in its `approved:` line, not `status:` |
+| `kanban/tickets/<n>.<m>.<slug>.md` | tickets; role-tagged append-only `## Log` |
 | `docs/glossary.md` | one canonical name per concept; update in the same PR that introduces it |
 | `docs/adr/` | numbered, append-only decisions (template in the plugin) |
 | `docs/domain-pack/` | everything domain-specific: charter, conventions, references |
