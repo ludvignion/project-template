@@ -2,6 +2,13 @@
 PLUGIN ?= $(shell ls -d ~/.claude/plugins/cache/ludvignion/harness-plugin/* 2>/dev/null | sort -V | tail -1)
 SCRIPTS := $(PLUGIN)/scripts
 
+# The venv lives outside the repo: on a Windows drvfs mount (/mnt/c) uv cannot
+# create one in-tree — copying wheels fails with EPERM. Override to relocate.
+UV_PROJECT_ENVIRONMENT ?= $(HOME)/.venvs/$(notdir $(CURDIR))
+UV_LINK_MODE ?= copy
+export UV_PROJECT_ENVIRONMENT
+export UV_LINK_MODE
+
 install:  ## Sync venv.
 	uv sync
 
