@@ -10,4 +10,6 @@ traces/sessions.jsonl
 traces/plan/*.html
 traces/verdict/*.html
 traces/board.html
+traces/blind-spots.md
 .env
+mutants/
