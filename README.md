@@ -18,3 +18,12 @@ Shell for a project built with [harness-plugin](https://github.com/ludvignion/ha
 5. Close-out: append to `traces/grill-misses.jsonl` if there was rework.
 
 Weekly: `make board`, `make digest`. After changing the plugin: `make replay`.
+
+## How the agent talks to you
+
+`/briefing` switches the agent to briefing style for the session: what changed, then lettered
+options you pick by letter, then one recommendation. Facts first, decisions last.
+
+It is opt-in per session. To make it the default everywhere, put the same rules in
+`~/.claude/CLAUDE.md` — that is personal config and does not belong in this repo, since anyone
+starting a project from this template inherits whatever is here.
