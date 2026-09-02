@@ -12,6 +12,10 @@ export UV_LINK_MODE
 install:  ## Sync venv.
 	uv sync
 
+plugin:  ## Refresh the marketplace clone, then update the plugin.
+	claude plugin marketplace update ludvignion
+	claude plugin update harness-plugin@ludvignion
+
 test:  ## Unit tests.
 	uv run pytest tests --ignore=tests/evals -q
 
@@ -50,4 +54,4 @@ loop:  ## Headless build→ci→verdict for one ticket. Usage: make loop T=1.2
 help:  ## Show this help.
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*##' '{printf "  %-12s %s\n", $$1, $$2}'
 
-.PHONY: install test lint complexity mutation ci eval plan verdict board digest replay loop help
+.PHONY: install plugin test lint complexity mutation ci eval plan verdict board digest replay loop help
