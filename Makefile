@@ -49,7 +49,7 @@ replay:  ## Re-run grill on golden briefs; diff escalations.
 	python3 $(SCRIPTS)/replay.py .
 
 loop:  ## Headless build→ci→verdict for one ticket. Usage: make loop T=1.2
-	python3 $(SCRIPTS)/loop.py $(T)
+	python3 $(SCRIPTS)/runner.py $(T)
 
 help:  ## Show this help.
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*##' '{printf "  %-12s %s\n", $$1, $$2}'
