@@ -33,9 +33,6 @@ ci: lint test complexity  ## What CI runs.
 eval:  ## Product evals (only if src/ calls a model). Costs money. Never in ci.
 	uv run pytest tests/evals -q
 
-plan:  ## Render gate-1 page. Usage: make plan N=1
-	python3 $(SCRIPTS)/render_plan.py $(N)
-
 verdict:  ## Render gate-2 page. Usage: make verdict T=1.2
 	python3 $(SCRIPTS)/render_verdict.py $(T)
 
@@ -54,4 +51,4 @@ loop:  ## Headless build→ci→verdict for one ticket. Usage: make loop T=1.2
 help:  ## Show this help.
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*##' '{printf "  %-12s %s\n", $$1, $$2}'
 
-.PHONY: install plugin test lint complexity mutation ci eval plan verdict board digest replay loop help
+.PHONY: install plugin test lint complexity mutation ci eval verdict board digest replay loop help
