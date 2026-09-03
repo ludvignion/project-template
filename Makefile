@@ -19,8 +19,8 @@ plugin:  ## Refresh the marketplace clone, then update the plugin.
 test:  ## Unit tests.
 	uv run pytest tests --ignore=tests/evals -q
 
-lint:  ## Lint + format check + types + import contracts.
-	uv run ruff check . && uv run ruff format --check . && uv run mypy src && uv run lint-imports
+lint:  ## Lint + format check + types.
+	uv run ruff check . && uv run ruff format --check . && uv run mypy src
 
 complexity:  ## Simplicity gates (radon).
 	uv run radon cc src -n C -s

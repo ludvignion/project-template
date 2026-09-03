@@ -1,6 +1,6 @@
 # project-template
 
-Shell for a project built with [harness-plugin](https://github.com/ludvignion/harness-plugin).
+<!-- FILL IN: what this repo builds, for whom -->
 
 ## Start a project
 

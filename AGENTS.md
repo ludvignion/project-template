@@ -15,7 +15,7 @@ Workflow comes from **harness-plugin** (pinned in `.claude/settings.json`). Do n
 | `docs/adr/` | numbered, append-only decisions (template in the plugin) |
 | `docs/domain-pack/` | everything domain-specific: charter, conventions, references, spend rules |
 | `traces/` | grill records, verdicts, plan pages, board, blind-spots. Machine-written. |
-| `src/app/` | product code. `MODULE.md` only on deep modules. |
+| `src/app/` | product code. |
 | `tests/` | mirrors `src/`. `tests/evals/` only when `src/` calls a model; never in `make ci`. |
 
 # Commands
@@ -39,6 +39,10 @@ Workflow comes from **harness-plugin** (pinned in `.claude/settings.json`). Do n
 - **The plan's routing stamp decides the process, not your caution.**
   Good: `scrutiny: light` → build on a branch, human reads the diff, no per-ticket verdict.
   Bad: "recommend a verdict first to be safe" on a light plan.
+- **Always-writable in any ticket: `docs/glossary.md` and the parent plan's `## Log`.**
+  Everything else needs `writes:` or a logged widening.
+  Good: glossary term added in the same PR, no `writes:` entry needed.
+  Bad: a verdict warn for "glossary written outside `writes:`".
 - **Report the terminal state and stop.**
   Good: "merged, main at ccb979b". Bad: "Done. Your move — A/B/C" after a completed task.
   New work enters only as a brief in `kanban/briefs/` or a `finding:` in a ticket Log.
@@ -47,3 +51,4 @@ Workflow comes from **harness-plugin** (pinned in `.claude/settings.json`). Do n
 
 Remove instructions over adding. Boring beats elegant unless an AC says otherwise.
 A new rule here needs a why plus a good and a bad example, like the ones above.
+Add import-linter with a real contract when `src/` has two or more packages.

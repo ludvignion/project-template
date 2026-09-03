@@ -7,7 +7,7 @@ dependencies = ["structlog>=24"]
 [dependency-groups]
 dev = [
   "pytest>=8", "pytest-cov", "hypothesis",
-  "ruff", "mypy", "import-linter", "mutmut", "radon",
+  "ruff", "mypy", "mutmut", "radon",
 ]
 
 [build-system]
