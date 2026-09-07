@@ -14,8 +14,8 @@
 ## Work
 
 1. Write `kanban/briefs/<n>-<slug>.md`.
-2. `/grill <n>`; approve the plan (`python3 $SCRIPTS/kanban_ops.py` has no approve yet: edit
-   `approved:` and `status:` in the plan, commit).
+2. `/grill <n>`; say "approve" in that session (the grill runs `kanban_ops.py approve <n>`),
+   or `make approve N=<n>` from a terminal.
 3. `/harness-plugin:runner <n>.<m>` or `/harness-plugin:runner plan <n>` in a Claude session:
    it starts the runner, relays the phases, prints the result block, and takes Gate 2 in words
    (`ship`, `reject: <reason>`, `child from F#`, `home F# to <id>`, `waive F#: <reason>`).
