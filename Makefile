@@ -33,16 +33,18 @@ ci: lint test complexity  ## What CI runs.
 eval:  ## Product evals (only if src/ calls a model). Costs money. Never in ci.
 	uv run pytest tests/evals -q
 
-board:  ## The acting board on localhost: approve, run, ship, reject, home, waive.
-	@if [ -f .env ] && [ -z "$(OPIK_URL_OVERRIDE)" ] && [ "$(OPIK_DISABLE)" != "1" ]; then \
-	  echo "OPIK_URL_OVERRIDE is empty in .env. Set it, or run with OPIK_DISABLE=1 to go untraced." >&2; exit 1; fi
-	python3 $(SCRIPTS)/board.py serve
+board:  ## Render traces/board.html (the runner and the Stop hook do this too). Open it in a browser.
+	python3 $(SCRIPTS)/render_board.py .
 
-run:  ## Headless build→ci→verdict for one ticket. Usage: make run T=1.2  (plans run from the board)
+run:  ## Headless build→ci→verdict. Usage: make run T=1.2  or  make run P=1  (a plan, pausing at every Gate 2). From a session: /harness-plugin:runner
 	@if [ -f .env ] && [ -z "$(OPIK_URL_OVERRIDE)" ] && [ "$(OPIK_DISABLE)" != "1" ]; then \
 	  echo "OPIK_URL_OVERRIDE is empty in .env. Set it, or run with OPIK_DISABLE=1 to go untraced." >&2; exit 1; fi
-	@if [ -z "$(T)" ]; then echo "usage: make run T=<id>" >&2; exit 1; fi
-	python3 $(SCRIPTS)/runner.py $(T)
+	@if [ -z "$(T)$(P)" ]; then echo "usage: make run T=<id> | make run P=<plan>" >&2; exit 1; fi
+	mkdir -p traces/runs && python3 $(SCRIPTS)/runner.py $(if $(P),--plan $(P),$(T)) 2>&1 | tee traces/runs/$(if $(P),plan-$(P),$(T)).log
+
+gate:  ## Gate 2 in words. Usage: make gate A="ship 1.2" | A="reject 1.2 <reason>" | A="child 1.2 F1" | A="home 1.2 F2 1.3" | A="waive 1.2 F3 <reason>"
+	@if [ -z "$(A)" ]; then echo 'usage: make gate A="ship <id>"' >&2; exit 1; fi
+	python3 $(SCRIPTS)/kanban_ops.py $(A) --who "$$(git config user.name)"
 
 verdict:  ## Render gate-2 page. Usage: make verdict T=1.2
 	python3 $(SCRIPTS)/render_verdict.py $(T)
@@ -59,4 +61,4 @@ loop:  ## Renamed. Use make run.
 help:  ## Show this help.
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*##' '{printf "  %-12s %s\n", $$1, $$2}'
 
-.PHONY: install plugin test lint complexity mutation ci eval board run verdict digest replay loop help
+.PHONY: install plugin test lint complexity mutation ci eval board run gate verdict digest replay loop help

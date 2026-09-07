@@ -16,3 +16,4 @@ traces/blind-spots.md
 .env
 mutants/
 .worktrees/
+traces/runs/

@@ -20,7 +20,7 @@ Workflow comes from **harness-plugin** (pinned in `.claude/settings.json`). Do n
 
 # Commands
 
-`make help`. Core: `install · ci · plan N= · board · verdict T= · digest · replay · runner T=`.
+`make help`. Core: `install · ci · board · run T=|P= · gate A= · verdict T= · digest · replay`. From a session: `/harness-plugin:runner`.
 
 # Invariants agents can't infer
 
